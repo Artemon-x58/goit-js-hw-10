@@ -1,22 +1,10 @@
 import axios from "axios";
 import SlimSelect from 'slim-select';
 import Notiflix from 'notiflix';
-import {fetchBreeds, fetchCatByBreed } from "./cat-api";
+import {fetchBreeds, fetchCatByBreed, selectEl, contEl, loader, errorEl, wrapEl, imgKat, title, descKat, temp, textChoose, content } from "./cat-api";
 
 axios.defaults.headers.common["x-api-key"] = "live_zLujiNOCDiWSjdGB1YUgqrKxYa2muYh5iurPJARB5ldgMIYXuZnxa876lyRjWeLx";
 
-const selectEl = document.querySelector('.breed-select');
-const contEl = document.querySelector('.cat-info');
-const loader = document.querySelector('.loader');
-const errorEl = document.querySelector('.error');
-
-const wrapEl = document.createElement("div");
-const imgKat = document.createElement("img");
-const title = document.createElement("h1")
-const descKat = document.createElement("p");
-const temp = document.createElement("p");
-const textChoose = document.createElement("p");
-const content = document.createElement("div");
 
 content.classList.add("content")
 content.appendChild(textChoose)
@@ -28,6 +16,7 @@ fetchBreeds()
 .then(fetchCatByBreed);
 
 selectEl.addEventListener('change', (e) => {
+  contEl.innerHTML = '';
   loader.classList.remove("is-hidden");
   console.log(textChoose)
   textChoose.classList.add("is-hidden");

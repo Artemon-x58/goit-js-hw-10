@@ -2,17 +2,20 @@ import axios from "axios";
 import Notiflix from 'notiflix';
 
 const selectEl = document.querySelector('.breed-select');
+const contEl = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
 const errorEl = document.querySelector('.error');
 
+const wrapEl = document.createElement("div");
+const imgKat = document.createElement("img");
+const title = document.createElement("h1")
+const descKat = document.createElement("p");
+const temp = document.createElement("p");
 const textChoose = document.createElement("p");
 const content = document.createElement("div");
 
-// content.classList.add("content")
-// content.append(textChoose)
-// document.body.insertAdjacentElement("afterbegin", content)
 
-export function fetchBreeds () {
+function fetchBreeds () {
     return axios.get('https://api.thecatapi.com/v1/breeds').then(response => {
       errorEl.classList.add("is-hidden");
     return  response.data    
@@ -22,10 +25,7 @@ export function fetchBreeds () {
     })
   };
   
-
-
-  
-export function fetchCatByBreed(breeds) {
+function fetchCatByBreed(breeds) {
     errorEl.classList.add("is-hidden");
     
     textChoose.classList.add("choose");
@@ -40,4 +40,6 @@ export function fetchCatByBreed(breeds) {
     selectEl.classList.remove("is-hidden");
     loader.classList.toggle("is-hidden");
 
-}
+};
+
+export {fetchBreeds, fetchCatByBreed, selectEl, contEl, loader, errorEl, wrapEl, imgKat, title, descKat, temp, textChoose, content}
