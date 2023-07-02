@@ -18,10 +18,8 @@ fetchBreeds()
 selectEl.addEventListener('change', (e) => {
   contEl.innerHTML = '';
   loader.classList.remove("is-hidden");
-  console.log(textChoose)
   textChoose.classList.add("is-hidden");
  
-    
     const breedId = e.srcElement.value;
     axios.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`).then(response => {
       errorEl.classList.add("is-hidden");
