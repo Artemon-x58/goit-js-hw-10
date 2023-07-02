@@ -4,7 +4,9 @@ body {
 }
 
 .cat-info {
-  font-size: 30px;  
+  font-size: 30px;
+  display: flex;
+  margin-top: 15px;
 }
 
 @keyframes changeWrap {
@@ -31,17 +33,25 @@ body {
 
 img {
   animation: imgChange 450ms linear;
+  margin-left: 20px;
   border: 3px solid teal;
+  width: 600px;
+  height: 600px;
+  border-radius: 10px;
 }
 
-// .breed-select {
-//   margin-right: auto;
-//   margin-left: auto;
-//   margin-top: auto;
-// }
+.breed-select {
+  margin-left: 20px;
+  font-size: 25px;
+  background-color: aquamarine;
+  font-family: 'Dancing Script', cursive;
+  border-color: transparent;
+}
 
 .wrap {
  animation: changeWrap 0.5s linear;
+ margin-left: 15px;
+ width: 1000px;
 }
 
 

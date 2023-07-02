@@ -1,7 +1,7 @@
 import axios from "axios";
 import SlimSelect from 'slim-select';
 import Notiflix from 'notiflix';
-import {fetchBreeds} from "./cat-api";
+import {fetchBreeds, fetchCatByBreed } from "./cat-api";
 
 axios.defaults.headers.common["x-api-key"] = "live_zLujiNOCDiWSjdGB1YUgqrKxYa2muYh5iurPJARB5ldgMIYXuZnxa876lyRjWeLx";
 
@@ -19,36 +19,19 @@ const textChoose = document.createElement("p");
 const content = document.createElement("div");
 
 content.classList.add("content")
-content.append(textChoose)
+content.appendChild(textChoose)
 document.body.insertAdjacentElement("afterbegin", content)
-
 selectEl.classList.add("is-hidden");
-imgKat.width = '600';
-imgKat.height = '600';
-imgKat.style.borderRadius = "10px"
 
 
 fetchBreeds()
-.then(breeds => {
-  errorEl.classList.add("is-hidden");
-  
-  textChoose.classList.add("choose");
-textChoose.textContent = "Please choose a cat"
-
-  breeds.forEach(breed => {
-    const option = document.createElement("option");
-    option.value = breed.id ;
-    option.textContent = breed.name;
-    selectEl.appendChild(option);
-  });
-  selectEl.classList.remove("is-hidden");
-  loader.classList.toggle("is-hidden");
-});
+.then(fetchCatByBreed);
 
 selectEl.addEventListener('change', (e) => {
-  loader.classList.toggle("is-hidden");
-  contEl.style.display = "none";
+  loader.classList.remove("is-hidden");
+  console.log(textChoose)
   textChoose.classList.add("is-hidden");
+ 
     
     const breedId = e.srcElement.value;
     axios.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`).then(response => {
@@ -64,11 +47,8 @@ selectEl.addEventListener('change', (e) => {
         wrapEl.append(title, descKat, temp)
         wrapEl.classList.add("wrap");
         contEl.append(imgKat, wrapEl);
-        wrapEl.style.marginLeft = "15px"
         
         loader.classList.toggle("is-hidden");
-        contEl.style.display = "flex";
-        contEl.style.marginTop = "15px";
         
     }).catch(err => {
       loader.classList.add("is-hidden");
